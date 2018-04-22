@@ -2,5 +2,5 @@
 
 #docker run --rm -it -v /etc/apt/apt.conf:/etc/apt/apt.conf:ro --privileged -v /dev:/dev:/shared -v /media/data2/NCS::/media/data2/NCS/ movidius:latest /bin/bash
 
-docker run --rm --net=host -it -v /etc/apt/apt.conf:/etc/apt/apt.conf:ro --privileged -v /dev:/dev:shared -v /media/data2/NCS/:/media/data2/NCS/ movidius:latest /bin/bash
+docker run --rm --net=host -it -v /etc/apt/apt.conf:/etc/apt/apt.conf:ro --privileged -v /home/jeff/code:/code -v /dev:/dev:shared -v /media/data2/NCS/:/media/data2/NCS/ movidius:latest /bin/bash
 

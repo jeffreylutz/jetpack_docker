@@ -1,4 +1,5 @@
-FROM ubuntu:16.04
+FROM ubuntu:16.04 
+
 ARG http_proxy
 
 ARG https_proxy
