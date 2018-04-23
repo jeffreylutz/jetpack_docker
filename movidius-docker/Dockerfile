@@ -32,17 +32,15 @@ RUN apt-get update \
       wget \
       vim \
     && apt-get clean all
-RUN useradd -c "Movidius User" -m movidius
 COPY 10-installer /etc/sudoers.d/
 RUN mkdir -p /etc/udev/rules.d/
-USER movidius
-WORKDIR /home/movidius
-RUN echo "export USER=movidius" >> /home/movidius/.bashrc
+WORKDIR /
 RUN git clone https://github.com/jeffreylutz/ncsdk.git
-WORKDIR /home/movidius/ncsdk
+WORKDIR /ncsdk
 ## Issue with udev in docker container.  
 ## Have to not run udevadm in /opt/NCSDK/install-ncsdk.sh
-RUN cd /home/movidius/ncsdk && sudo ./install.sh
+RUN cd /ncsdk && chmod +x *.sh && ./install.sh
+RUN cd /ncsdk && ./install-opencv.sh
 #RUN make install
 #RUN make examples
 
