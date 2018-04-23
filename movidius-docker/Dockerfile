@@ -30,13 +30,20 @@ RUN apt-get update \
       udev \
       usbutils \
       wget \
+      vim \
     && apt-get clean all
 RUN useradd -c "Movidius User" -m movidius
 COPY 10-installer /etc/sudoers.d/
 RUN mkdir -p /etc/udev/rules.d/
 USER movidius
 WORKDIR /home/movidius
-RUN git clone https://github.com/movidius/ncsdk.git
+RUN echo "export USER=movidius" >> /home/movidius/.bashrc
+RUN git clone https://github.com/jeffreylutz/ncsdk.git
 WORKDIR /home/movidius/ncsdk
-RUN make install
-RUN make examples
+## Issue with udev in docker container.  
+## Have to not run udevadm in /opt/NCSDK/install-ncsdk.sh
+RUN cd /home/movidius/ncsdk && sudo ./install.sh
+#RUN make install
+#RUN make examples
+
+
